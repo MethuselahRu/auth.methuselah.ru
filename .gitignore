@@ -12,8 +12,9 @@
 hs_err_pid*
 
 # NetBeans Files #
+/nbproject
 nbactions.xml
 nb-configuration.xml
-/target/
-/nbproject
-/yggdrasilSettings.php
+
+# Project ignores
+config/yggdrasilSettings.php
