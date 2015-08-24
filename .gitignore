@@ -1,4 +1,4 @@
-﻿*.class
+*.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -12,9 +12,10 @@
 hs_err_pid*
 
 # NetBeans Files #
-/nbproject
 nbactions.xml
 nb-configuration.xml
+/target/
+/nbproject
 
-# Project ignores
-config/yggdrasilSettings.php
+# Project hidden files
+/config/yggdrasilSettings.php

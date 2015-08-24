@@ -30,7 +30,7 @@ $voteMoneyToAdd = 100;
 
 function voteOnTopAccepted($uuid, $top = null)
 {
-	// Настройки подключения к БД
+	// Настройки подключения к БД игрового сервера. Да, так быть не должно :)
 	$dbHostname = $methuselah["primary-hostname"];
 	$dbDatabase = $methuselah["primary-database"];
 	$dbUsername = $methuselah["primary-username"];

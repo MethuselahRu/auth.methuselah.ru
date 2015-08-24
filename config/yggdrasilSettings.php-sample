@@ -5,18 +5,16 @@ if(!defined('METHUSELAH_INCLUDE_CHECK'))
 }
 
 $methuselah = array();
-
-// Отладка
-$methuselah["debug"] = false;
-
-// Настройки подключения к основной БД
 $methuselah["mysql-hostname"] = "p:localhost";
 $methuselah["mysql-database"] = "authserver";
 $methuselah["mysql-username"] = "USERNAME";
 $methuselah["mysql-password"] = "PASSWORD";
 
-// Код проекта по умолчанию
+// Код проекта по умолчанию.
 $methuselah["auth-default-project"] = "A1B2C";
+
+// Разрешить отладочные GET запросы?
+$methuselah["debug"] = false;
 
 // Интеграция с рейтингами серверов:
 if(defined('METHUSELAH_INCLUDE_VOTES_CHECK'))
@@ -28,16 +26,16 @@ if(defined('METHUSELAH_INCLUDE_VOTES_CHECK'))
 // Интеграция с платёжными системами:
 if(defined('METHUSELAH_TOP_SECRET_CHECK'))
 {
-	// Список допустимых секретов Яндекс-Денег
+	// Список допустимых секретов Яндекс-Денег:
 	$methuselah["yandex-money-secrets"] = array(
 		"YaSecret#1",
 		"YaSecret#2",
 	);
 }
 
-// Прямое соединение к БД игрового сервера.
+// Прямое соединение к БД игрового сервера для зачисления бонусов за голосования.
 // Его тут быть не должно, просто у меня всё ещё костыли для этого.
-$methuselah["game-server-hostname"] = 'ПЫЩЬ';
-$methuselah["game-server-database"] = 'ПЫЩЬ';
-$methuselah["game-server-username"] = 'ПЫЩЬ';
-$methuselah["game-server-password"] = 'ПЫЩЬ';
+$methuselah["primary-hostname"] = 'localhost';
+$methuselah["primary-database"] = 'minecraft';
+$methuselah["primary-username"] = 'username';
+$methuselah["primary-password"] = 'password';
