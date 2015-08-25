@@ -9,7 +9,7 @@ $client   = filter_input(INPUT_GET, 'client', FILTER_SANITIZE_STRING, FILTER_FLA
 $gamemd5  = filter_input(INPUT_GET, 'hash',   FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH)
 	or die("NO");
 
-// Тоже так-то надо бы удалить
+// РўРѕР¶Рµ С‚Р°Рє-С‚Рѕ РЅР°РґРѕ Р±С‹ СѓРґР°Р»РёС‚СЊ
 foreach($admins as $admin)
 {
 	if(strtolower($username) == strtolower($admin))
@@ -19,15 +19,15 @@ foreach($admins as $admin)
 }
 
 $md5list = array(
-	// md5_file($dataFolder . 'minecraft_v1.6.4_base.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.6.4_plus.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.6.4_director.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.7.2_base.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.7.2_plus.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.7.10_base.jar'),
-	// md5_file($dataFolder . 'minecraft_v1.7.10_plus.jar'),
-	md5_file($dataFolder . 'minecraft_v1.8_base.jar'),
-	md5_file($dataFolder . 'minecraft_v1.8_plus.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.6.4_base.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.6.4_plus.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.6.4_director.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.7.2_base.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.7.2_plus.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.7.10_base.jar'),
+	// md5_file($dataFolder . 'clients/minecraft_v1.7.10_plus.jar'),
+	md5_file($dataFolder . 'clients/minecraft_v1.8_base.jar'),
+	md5_file($dataFolder . 'clients/minecraft_v1.8_plus.jar'),
 );
 
 foreach($md5list as $hash)

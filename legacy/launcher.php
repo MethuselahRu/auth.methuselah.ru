@@ -4,9 +4,9 @@ include "legacy.php";
 
 $md5list = array(
 	// Windows XP, 7, 8, 10
-	md5_file($dataFolder . 'Launcher.exe'),
+	md5_file($dataFolder . 'launcher/Launcher.exe'),
 	// Linux, OSX, etc.
-	md5_file($dataFolder . 'Launcher.jar'),
+	md5_file($dataFolder . 'launcher/Launcher.jar'),
 	// IDE-guided
 	"48617665204c61756e63686572206265656e207374617274656420756e646572204944453f",
 );
