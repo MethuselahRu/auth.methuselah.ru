@@ -19,22 +19,20 @@ $code = filter_var($payload['project'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRI
 		"Method Not Allowed",
 		"The method specified in the request is not allowed for the resource identified by the request URI.");
 
-function getProjectClients($code)
+function getProjectServers($code)
 {
 	global $authserver;
-	$query = "SELECT `caption`, `localized_caption` AS `captionLocalized`, `folder`, `base_version` AS `baseVersion`,
-		`jar_file` AS `jarFile`, `contents_file` AS `contentsFile`,
-		`main_class` AS `mainClass`,
-		`game_parameters` AS `additionalGameArguments`, `java_parameters` AS `additionalJavaArguments`
-		FROM `projects`.`clients` WHERE `project` = '$code' AND `public` = b'1' ORDER BY `priority` ASC, `caption` ASC;";
+	$query = "SELECT `caption`, CONCAT(`address`, ':', `port`) as `address` FROM `projects`.`servers`
+		WHERE `project` = '$code' AND `production` = b'1' ORDER BY `id` ASC;";
 	$result = $authserver->query($query)
 		or responseWithError("InternalDatabaseError");
 	$return = array();
 	while($row = $result->fetch_assoc())
 	{
+		$row['hideAddress'] = false;
 		$return[] = $row;
 	}
 	return $return;
 }
 
-response(array("clients" => getProjectClients($code)));
+response(array("servers" => getProjectServers($code)));

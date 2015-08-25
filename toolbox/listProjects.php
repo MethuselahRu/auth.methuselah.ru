@@ -1,7 +1,4 @@
 <?php
-/*
- * https://auth.methuselah.ru/toolbox/uuid2name.php?uuid=<uuid to find current name>
- */
 define('METHUSELAH_INCLUDE_CHECK', true);
 require_once "toolbox_internal.php";
 
