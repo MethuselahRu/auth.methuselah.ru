@@ -19,14 +19,16 @@ function cleanupJoins($accessToken)
 function cleanupGuests()
 {
 	global $authserver;
-	$select = "SELECT `uuid` FROM `authserver`.`accounts` WHERE `guest` = b'1' AND `timestamp` < NOW() - INTERVAL 1 DAY";
-	$deleteTokens   = "DELETE FROM `authserver`.`account_server_joins` WHERE `uuid` IN ($select);";
-	$deleteNames    = "DELETE FROM `authserver`.`account_names` WHERE `uuid` IN ($select);";
-	$deleteAccounts = "DELETE FROM `authserver`.`accounts` WHERE `uuid` IN ($select);";
-	$authserver->query($deleteTokens)
+	$deleteAccounts = "DELETE FROM `authserver`.`accounts`              WHERE `guest` = b'1' AND AND `timestamp` < NOW() - INTERVAL 1 DAY;";
+	$deleteNames    = "DELETE FROM `authserver`.`account_names`         WHERE `uuid` NOT IN (SELECT `uuid` FROM `authserver`.`accounts`);";
+	$deleteTokens   = "DELETE FROM `authserver`.`account_access_tokens` WHERE `uuid` NOT IN (SELECT `uuid` FROM `authserver`.`accounts`);";
+	$deleteProps    = "DELETE FROM `authserver`.`account_props`         WHERE `uuid` NOT IN (SELECT `uuid` FROM `authserver`.`accounts`);";
+	$authserver->query($deleteAccounts)
 		or responseWithError("InternalDatabaseError", $authserver->error);
 	$authserver->query($deleteNames)
 		or responseWithError("InternalDatabaseError", $authserver->error);
-	$authserver->query($deleteAccounts)
+	$authserver->query($deleteTokens)
+		or responseWithError("InternalDatabaseError", $authserver->error);
+	$authserver->query($deleteProps)
 		or responseWithError("InternalDatabaseError", $authserver->error);
 }
