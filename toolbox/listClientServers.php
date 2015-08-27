@@ -19,11 +19,20 @@ $code = filter_var($payload['project'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRI
 		"Method Not Allowed",
 		"The method specified in the request is not allowed for the resource identified by the request URI.");
 
-function getProjectServers($code)
+$client = filter_var($payload['clientCaption'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH)
+	or responseWithError(
+		"Method Not Allowed",
+		"The method specified in the request is not allowed for the resource identified by the request URI.");
+
+function getProjectServers($code, $client)
 {
 	global $authserver;
-	$query = "SELECT `caption`, CONCAT(`address`, ':', `port`) as `address` FROM `projects`.`servers`
-		WHERE `project` = '$code' AND `production` = b'1' ORDER BY `id` ASC;";
+	$query = "SELECT `id`, `caption`, CONCAT(`address`, ':', `port`) as `address` FROM `projects`.`servers`
+			WHERE `project` = '$code' AND `clients` LIKE '%$client%' AND `production` = b'1'
+		UNION
+		SELECT `id`, NULL as `caption`, CONCAT(`address`, ':', `port`) as `address` FROM `projects`.`servers`
+			WHERE `project` = '$code' AND (`production` = b'0' OR `remove` = b'1')
+		ORDER BY `id` ASC;";
 	$result = $authserver->query($query)
 		or responseWithError("InternalDatabaseError");
 	$return = array();
@@ -35,4 +44,4 @@ function getProjectServers($code)
 	return $return;
 }
 
-response(array("servers" => getProjectServers($code)));
+response(array("servers" => getProjectServers($code, $client)));
